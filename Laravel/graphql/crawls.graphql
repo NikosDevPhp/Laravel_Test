@@ -1,0 +1,19 @@
+type Query {
+    crawls: [Crawl!]! @paginate(defaultCount: 10)
+    crawl(id: ID @eq): Crawl @find
+}
+
+enum StatusCodes {
+    CRAWLED @enum(value: 200)
+    PERMANENT_REDIR @enum(value: 301)
+    TEMPORARY_REDIR @enum(value: 302)
+}
+
+type Crawl {
+    id: ID!
+    body: String!
+    url: String!
+    response_code: StatusCodes
+    created_at: DateTime!
+    updated_at: DateTime!
+}
